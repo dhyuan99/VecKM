@@ -61,7 +61,7 @@ Then you will get a local geometry encoding by:
 pts = torch.randn(n, 3).cuda() # your input point cloud.
 G = vkm(pts)
 ```
-#### Caution: VecKM is sensitive to scaling. Please make sure your data is properly scaled before passing into VecKM.
+#### ⚠️ Caution: VecKM is sensitive to scaling. Please make sure your data is properly scaled before passing into VecKM.
 
 ## Implementation by Yourself
 

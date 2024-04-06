@@ -39,6 +39,30 @@ cd -
 pip install .
 ```
 
+## Usage
+#### Case 1: If you have small point cloud size, e.g. < 5000, it is recommended to use the following implementation:
+```
+from VecKM.cuvkm.cuvkm import VecKM
+vkm = VecKM(d=128, alpha=30, beta=9, positional_encoding=False).cuda()
+```
+Or if you want to use the slower Python implementation without installation,
+```
+from VecKM.pyvkm.vkm_small import VecKM
+vkm = VecKM(d=128, alpha=30, beta=9, positional_encoding=False).cuda()
+```
+#### Case 2: If you have large point cloud size, e.g. > 10000, it is recommended to use the following implementation:
+```
+from VecKM.pyvkm.vkm_large import VecKM
+vkm = VecKM(d=256, alpha=30, beta=9, p=2048).cuda()
+# Please refer to the "Implementation by Yourself" section for suggestion to pick d and p.
+```
+Then you will get a local geometry encoding by:
+```
+pts = torch.randn(n, 3).cuda() # your input point cloud.
+G = vkm(pts)
+```
+#### Caution: VecKM is sensitive to scaling. Please make sure your data is properly scaled before passing into VecKM.
+
 ## Implementation by Yourself
 
 If you are struggled with installation (e.g. due to some environment issues), it is very simple to implement VecKM if you want to incorporate it into your own code. Suppose your input point cloud `pts` has shape `(n,3)` or `(b,n,3)`, then the following code will give you the VecKM local geometry encoding with output shape `(n,d)` or `(b,n,d)`. It is recommended to have PyTorch >= 1.13.0 since it has better support for complex tensors, but lower versions shall also work.

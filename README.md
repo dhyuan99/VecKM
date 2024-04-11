@@ -126,7 +126,6 @@ class VecKM(nn.Module):
             eB,                                                                 # Real(..., n, 2p)
             eB.transpose(-1,-2) @ eA                                            # Real(..., 2p, 2d)
         )                                                                       # Real(..., n, 2d)
-        print(G.shape, eA.shape)
         G = torch.complex(
             G[..., :self.d], G[..., self.d:]
         ) / torch.complex(

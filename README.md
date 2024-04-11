@@ -149,7 +149,8 @@ feat_trans = nn.Sequential(
     ComplexLinear(128, 128)
 )
 G = feat_trans(vkm(pts))
-G = G.real**2 + G.imag**2 # it will be Real(10, 1000, 128) or Real(1000, 1024).```
+G = G.real**2 + G.imag**2 # it will be Real(10, 1000, 128) or Real(1000, 1024).
+```
 
 ## Effect of Parameters $\alpha$ and $\beta$
 There are two parameters `alpha` and `beta` in the VecKM encoding. They are controlling the **resolution** and **receptive field** of VecKM, respectively. A higher `alpha` will produce a more detailed encoding of the local geometry, and a smaller `alpha` will produce a more abstract encoding. A higher `beta` will result in a smaller receptive field. You could look at the figure below for a rough understanding.

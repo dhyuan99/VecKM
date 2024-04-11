@@ -127,9 +127,9 @@ class VecKM(nn.Module):
             eB.transpose(-1,-2) @ eA                                            # Real(..., 2p, 2d)
         )                                                                       # Real(..., n, 2d)
         G = torch.complex(
-            G[:,:self.d], G[:,self.d:]
+            G[..., :self.d], G[..., self.d:]
         ) / torch.complex(
-            eA[:,:self.d], eA[:,self.d:]
+            eA[..., :self.d], eA[..., self.d:]
         )                                                                       # Complex(..., n, d)
         G = G / torch.norm(G, dim=-1, keepdim=True) * self.sqrt_d
         return G

@@ -94,6 +94,7 @@ class VecKM(nn.Module):
         """
         super().__init__()
         self.sqrt_d = d ** 0.5
+        self.d = d
 
         self.A = torch.stack(
             [strict_standard_normal(d) for _ in range(3)], 

@@ -292,7 +292,7 @@ Several examples:
 * d = 128, p = 8192 is for point cloud size ~50k. Runtime is about 76ms.
 
 ## Tutorials
-Check out the [example.ipynb](example.ipynb) for the example analysis of VecKM.
+Check out the [example.ipynb](examples/example.ipynb) for the example analysis of VecKM.
 
 ## Experiments
 Check out the applications of VecKM to [normal estimation](experiments/normal_estimation), [classification](experiments/classification), [part segmentation](experiments/part_segmentation). The overall architecture change will be like:

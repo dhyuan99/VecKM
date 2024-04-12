@@ -41,7 +41,7 @@ pip install .
 
 ## Usage
 
-This section is illustrated with an [examples/example.ipynb](examples/examples.ipynb).
+ℹ️ This section is illustrated with an [examples/example.ipynb](examples/examples.ipynb).
 
 ⚠️ VecKM is sensitive to scaling. Please make sure to **scale your data so that your local point cloud lies within a UNIT BALL with radius 1.**
 

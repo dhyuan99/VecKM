@@ -40,13 +40,15 @@ pip install .
 ```
 
 ## Usage
-⚠️ Caution: VecKM is sensitive to scaling. Please make sure your data is properly scaled before passing into VecKM. 
+⚠️ Caution: VecKM is sensitive to scaling. Please make sure to **scale your data so that your local point cloud lies within a UNIT BALL with radius 1.**
 
 ℹ️ See **[Suggestion for Scaling]** for how to scale your point cloud before passing to VecKM.
 
-ℹ️ See **[Suggestion for Picking $\alpha$, $\beta$]** for how to select appropriate `alpha` and `beta` parameters.
+ℹ️ See **[Suggestion for Tuning $\alpha$, $\beta$]** for how to select appropriate `alpha` and `beta` parameters.
 
-ℹ️ See **[Suggestion for Picking $d$, $p$]** for how to select appropriate `alpha` and `beta` parameters.
+ℹ️ See **[Suggestion for Tuning $d$, $p$]** for how to select appropriate `alpha` and `beta` parameters.
+
+ℹ️ **Feel free to contact me if you are unsure! I will try to respond within 1 day.**
 
 #### Case 1: If you have small point cloud size, e.g. < 5000, it is recommended to use the following implementation:
 ```
@@ -56,7 +58,7 @@ vkm = VecKM(d=128, alpha=6, beta=1.8, positional_encoding=False).cuda()
 Or if you want to use the slower Python implementation without installation,
 ```
 from VecKM.pyvkm.vkm_small import VecKM
-vkm = VecKM(d=128, alpha=30, beta=9, positional_encoding=False).cuda()
+vkm = VecKM(d=128, alpha=6, beta=1.8, positional_encoding=False).cuda()
 ```
 #### Case 2: If you have large point cloud size, e.g. > 10000, it is recommended to use the following implementation:
 ```
@@ -175,7 +177,9 @@ There are two parameters `alpha` and `beta` in the VecKM encoding. They are cont
 
 <img src="assets/parameters.jpg" style="width:80%">
 
-**Assuming your input is normalized within a ball with radius 1.** The overall advice for picking `alpha` and `beta` will be, if your task is low-level, such as feature matching, normal estimation, then `alpha` in range ``(60, 120)`` is suggested. If your task is high-level, such as classification and segmentation, then `alpha` in range ``(20, 30)`` is suggested. For `beta`, it is closely related to the neighborhood radius. We provide a table of the correspondence. For example, if you want to extract the local geometry encoding with radius 0.3, then you would select beta to be 6.
+* You can slightly increase `alpha` if you have a relatively dense point cloud and want high-frequency details.
+* You can slightly decrease `alpha` if you want to smooth out the high-frequency details and only keep the low-frequency components.
+* For `beta`, it is closely related to the neighborhood radius. We provide a table of the correspondence. For example, if you want to extract the local geometry encoding with radius 0.3, then you would select beta to be 6.
 
 <table>
 <thead>
@@ -287,6 +291,15 @@ There are two parameters `alpha` and `beta` in the VecKM encoding. They are cont
   </tr>
 </tbody>
 </table>
+
+## Suggestion for picking $d$ and $p$
+We find empirically $d\times p$ is strongly correlated to the encoding quality. Here are several tips:
+* A larger local neighborhood requires a larger $d$.
+* A larger point cloud size requires a larger $p$.
+
+Several examples:
+* d = 256, p = 4096 is for point cloud size ~20k. Runtime is about 28ms.
+* d = 128, p = 8192 is for point cloud size ~50k. Runtime is about 76ms.
 
 ## Examples
 Check out the [examples](examples) for the example analysis of VecKM.

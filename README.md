@@ -40,15 +40,9 @@ pip install .
 ```
 
 ## Usage
-⚠️ Caution: VecKM is sensitive to scaling. Please make sure to **scale your data so that your local point cloud lies within a UNIT BALL with radius 1.**
-
-ℹ️ See **[Suggestion for Scaling]** for how to scale your point cloud before passing to VecKM.
-
-ℹ️ See **[Suggestion for Tuning $\alpha$, $\beta$]** for how to select appropriate `alpha` and `beta` parameters.
-
-ℹ️ See **[Suggestion for Tuning $d$, $p$]** for how to select appropriate `alpha` and `beta` parameters.
-
-ℹ️ **Feel free to contact me if you are unsure! I will try to respond within 1 day.**
+⚠️ VecKM is sensitive to scaling. Please make sure to **scale your data so that your local point cloud lies within a UNIT BALL with radius 1.**
+⚠️ For example, if you have a point cloud `pts` and you want to consider the local geometry with radius 0.1. Then you will do `pts *= 10` so that now you are considering the local geometry with radius 1.
+⚠️ If your x, y, z do not have the same scale, make sure scaling them so that they have the same scale.
 
 #### Case 1: If you have small point cloud size, e.g. < 5000, it is recommended to use the following implementation:
 ```
@@ -160,16 +154,12 @@ G = feat_trans(vkm(pts))
 G = G.real**2 + G.imag**2 # it will be Real(10, 1000, 128) or Real(1000, 1024).
 ```
 
-## Suggestion for Scaling
-I found this setting usually yields good encoding quality.
-#### Step 1: Scale your data so that your local point cloud lies within a UNIT BALL with radius 1.
-For example, if you have a point cloud `pts` and you want to consider the local geometry with radius 0.1. Then you will do `pts *= 10` so that now you are considering the local geometry with radius 1.
+ℹ️ See **[Suggestion for Tuning $\alpha$, $\beta$]** for how to select appropriate `alpha` and `beta` parameters.
 
-⚠️ If your x, y, z do not have the same scale, make sure scaling them so that they have the same scale.
-#### Step 2: Use this setting:
-```
-vkm = VecKM(d=256, alpha=6, beta=1.8, p=2048)
-```
+ℹ️ See **[Suggestion for Tuning $d$, $p$]** for how to select appropriate `alpha` and `beta` parameters.
+
+ℹ️ **Feel free to contact me if you are unsure! I will try to respond within 1 day.**
+
 See **[Suggestions for picking $\alpha$ and $\beta$]**, **[Suggestions for picking $d$ and $p$]** for finetuning the parameters.
 
 ## Suggestions for picking $\alpha$ and $\beta$
@@ -308,16 +298,6 @@ Check out the [examples](examples) for the example analysis of VecKM.
 Check out the applications of VecKM to [normal estimation](experiments/normal_estimation), [classification](experiments/classification), [part segmentation](experiments/part_segmentation). The overall architecture change will be like:
 
 <img src="assets/deep_VecKM.jpg" style="width:80%">
-
-<!-- # Todo List
-- [ ] VecKM library documentation.
-- [ ] VecKM CUDA library efficiency improvement.
-- [ ] Normal estimation baseline outputs.
-- [ ] Use VecKM CUDA library to rerun classification experiments.
-- [ ] Use VecKM CUDA library to rerun part segmentation experiments.
-- [ ] Semantic segmentation code organization and documentation.
-
-I am actively maintaining this repository. If you have any question, please feel free to raise an issue or contact me through my email [dhyuan@umd.edu](dhyuan@umd.edu). If the issue is important, I will post it to the Todo list. -->
 
 # Citation
 If you find it helpful, please consider citing our papers:

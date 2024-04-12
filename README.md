@@ -41,7 +41,9 @@ pip install .
 
 ## Usage
 ⚠️ VecKM is sensitive to scaling. Please make sure to **scale your data so that your local point cloud lies within a UNIT BALL with radius 1.**
+
 ⚠️ For example, if you have a point cloud `pts` and you want to consider the local geometry with radius 0.1. Then you will do `pts *= 10` so that now you are considering the local geometry with radius 1.
+
 ⚠️ If your x, y, z do not have the same scale, make sure scaling them so that they have the same scale.
 
 #### Case 1: If you have small point cloud size, e.g. < 5000, it is recommended to use the following implementation:

@@ -162,8 +162,6 @@ G = G.real**2 + G.imag**2 # it will be Real(10, 1000, 128) or Real(1000, 1024).
 
 ℹ️ **Feel free to contact me if you are unsure! I will try to respond within 1 day.**
 
-See **[Suggestions for picking $\alpha$ and $\beta$]**, **[Suggestions for picking $d$ and $p$]** for finetuning the parameters.
-
 ## Suggestions for picking $\alpha$ and $\beta$
 There are two parameters `alpha` and `beta` in the VecKM encoding. They are controlling the **resolution** and **receptive field** of VecKM, respectively. A higher `alpha` will produce a more detailed encoding of the local geometry, and a smaller `alpha` will produce a more abstract encoding. A higher `beta` will result in a smaller receptive field. You could look at the figure below for a rough understanding.
 

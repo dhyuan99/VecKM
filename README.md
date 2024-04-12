@@ -40,10 +40,18 @@ pip install .
 ```
 
 ## Usage
+⚠️ Caution: VecKM is sensitive to scaling. Please make sure your data is properly scaled before passing into VecKM. 
+
+ℹ️ See **[Suggestion for Scaling]** for how to scale your point cloud before passing to VecKM.
+
+ℹ️ See **[Suggestion for Picking $\alpha$, $\beta$]** for how to select appropriate `alpha` and `beta` parameters.
+
+ℹ️ See **[Suggestion for Picking $d$, $p$]** for how to select appropriate `alpha` and `beta` parameters.
+
 #### Case 1: If you have small point cloud size, e.g. < 5000, it is recommended to use the following implementation:
 ```
 from VecKM.cuvkm.cuvkm import VecKM
-vkm = VecKM(d=128, alpha=30, beta=9, positional_encoding=False).cuda()
+vkm = VecKM(d=128, alpha=6, beta=1.8, positional_encoding=False).cuda()
 ```
 Or if you want to use the slower Python implementation without installation,
 ```
@@ -53,17 +61,14 @@ vkm = VecKM(d=128, alpha=30, beta=9, positional_encoding=False).cuda()
 #### Case 2: If you have large point cloud size, e.g. > 10000, it is recommended to use the following implementation:
 ```
 from VecKM.pyvkm.vkm_large import VecKM
-vkm = VecKM(d=256, alpha=30, beta=9, p=2048).cuda()
-# Please refer to the "Implementation by Yourself" section for suggestion to pick d and p.
+vkm = VecKM(d=256, alpha=6, beta=1.8, p=2048).cuda()
 ```
 Then you will get a local geometry encoding by:
 ```
 pts = torch.randn(n, 3).cuda() # your input point cloud.
 G = vkm(pts)
 ```
-#### ⚠️ Caution: VecKM is sensitive to scaling. Please make sure your data is properly scaled before passing into VecKM.
-
-## Implementation by Yourself
+### Implementation by Yourself
 
 If you are struggled with installation (e.g. due to some environment issues), it is very simple to implement VecKM if you want to incorporate it into your own code. Suppose your input point cloud `pts` has shape `(n,3)` or `(b,n,3)`, then the following code will give you the VecKM local geometry encoding with output shape `(n,d)` or `(b,n,d)`. It is recommended to have PyTorch >= 1.13.0 since it has better support for complex tensors, but lower versions shall also work.
 
@@ -83,8 +88,10 @@ def strict_standard_normal(d):
     return x
 
 class VecKM(nn.Module):
-    def __init__(self, d=256, alpha=30, beta=9, p=4096):
-        """ I tested empirically, here are some general suggestions for selecting parameters d and p: 
+    def __init__(self, d=256, alpha=6, beta=1.8, p=4096):
+        """ I tested empirically, here are some general suggestions for selecting parameters d and p:
+        (alpha=6, beta=1.8) works for the data scale that your neighbordhood radius = 1.
+        Please ensure your point cloud is appropriately scaled!
         d = 256, p = 4096 is for point cloud size ~20k. Runtime is about 28ms.
         d = 128, p = 8192 is for point cloud size ~50k. Runtime is about 76ms.
         For larger point cloud size, please enlarge p, but if that costs too much, please reduce d.
@@ -151,7 +158,19 @@ G = feat_trans(vkm(pts))
 G = G.real**2 + G.imag**2 # it will be Real(10, 1000, 128) or Real(1000, 1024).
 ```
 
-## Effect of Parameters $\alpha$ and $\beta$
+## Suggestion for Scaling
+I found this setting usually yields good encoding quality.
+#### Step 1: Scale your data so that your local point cloud lies within a UNIT BALL with radius 1.
+For example, if you have a point cloud `pts` and you want to consider the local geometry with radius 0.1. Then you will do `pts *= 10` so that now you are considering the local geometry with radius 1.
+
+⚠️ If your x, y, z do not have the same scale, make sure scaling them so that they have the same scale.
+#### Step 2: Use this setting:
+```
+vkm = VecKM(d=256, alpha=6, beta=1.8, p=2048)
+```
+See **[Suggestions for picking $\alpha$ and $\beta$]**, **[Suggestions for picking $d$ and $p$]** for finetuning the parameters.
+
+## Suggestions for picking $\alpha$ and $\beta$
 There are two parameters `alpha` and `beta` in the VecKM encoding. They are controlling the **resolution** and **receptive field** of VecKM, respectively. A higher `alpha` will produce a more detailed encoding of the local geometry, and a smaller `alpha` will produce a more abstract encoding. A higher `beta` will result in a smaller receptive field. You could look at the figure below for a rough understanding.
 
 <img src="assets/parameters.jpg" style="width:80%">

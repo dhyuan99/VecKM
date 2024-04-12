@@ -40,6 +40,9 @@ pip install .
 ```
 
 ## Usage
+
+This section is illustrated with an [examples/example.ipynb](examples/examples.ipynb).
+
 ⚠️ VecKM is sensitive to scaling. Please make sure to **scale your data so that your local point cloud lies within a UNIT BALL with radius 1.**
 
 ⚠️ For example, if you have a point cloud `pts` and you want to consider the local geometry with radius 0.1. Then you will do `pts *= 10` so that now you are considering the local geometry with radius 1.

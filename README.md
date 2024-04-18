@@ -30,10 +30,6 @@
 It is very simple to implement VecKM if you want to incorporate it into your own code. Suppose your input point cloud `pts` has shape `(n,3)` or `(b,n,3)`, then the following code will give you the VecKM local geometry encoding with output shape `(n,d)` or `(b,n,d)`. It is recommended to have PyTorch >= 1.13.0 since it has better support for complex tensors, but lower versions shall also work.
 
 ```
-conda create -n VecKM python=3.11
-conda activate VecKM
-conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia
-conda install -c conda-forge cudatoolkit-dev
 pip install scipy
 pip install complexPyTorch
 ```

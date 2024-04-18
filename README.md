@@ -62,8 +62,8 @@ class VecKM(nn.Module):
         For the selection of parameter alpha and beta, please see the github section below.
         """
         super().__init__()
+        self.alpha, self.beta, self.d, self.p = alpha, beta, d, p
         self.sqrt_d = d ** 0.5
-        self.d = d
 
         self.A = torch.stack(
             [strict_standard_normal(d) for _ in range(3)], 

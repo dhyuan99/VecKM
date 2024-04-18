@@ -17,28 +17,6 @@
 ## Highlighted Features
 <img src="assets/teasor_explained.jpg" style="width:100%">
 
-## Installation
-First, install the dependencies:
-```
-conda create -n VecKM python=3.11
-conda activate VecKM
-conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia
-conda install -c conda-forge cudatoolkit-dev
-pip install scipy
-pip install complexPyTorch
-```
-If you want to use the pure PyTorch implementation (slower but more convenient), without CUDA runtime and memory optimization, simply install by:
-```
-pip install .
-```
-If you want to use the CUDA optimized implementation, please run:
-```
-cd src/cuvkm
-python setup.py install
-cd -
-pip install .
-```
-
 ## Usage
 
 ℹ️ This section is illustrated with an [examples/example.ipynb](examples/examples.ipynb).
@@ -49,29 +27,16 @@ pip install .
 
 ⚠️ If your x, y, z do not have the same scale, make sure scaling them so that they have the same scale.
 
-#### Case 1: If you have small point cloud size, e.g. < 5000, it is recommended to use the following implementation:
-```
-from VecKM.cuvkm.cuvkm import VecKM
-vkm = VecKM(d=128, alpha=6, beta=1.8, positional_encoding=False).cuda()
-```
-Or if you want to use the slower Python implementation without installation,
-```
-from VecKM.pyvkm.vkm_small import VecKM
-vkm = VecKM(d=128, alpha=6, beta=1.8, positional_encoding=False).cuda()
-```
-#### Case 2: If you have large point cloud size, e.g. > 10000, it is recommended to use the following implementation:
-```
-from VecKM.pyvkm.vkm_large import VecKM
-vkm = VecKM(d=256, alpha=6, beta=1.8, p=2048).cuda()
-```
-Then you will get a local geometry encoding by:
-```
-pts = torch.randn(n, 3).cuda() # your input point cloud.
-G = vkm(pts)
-```
-### Implementation by Yourself
+It is very simple to implement VecKM if you want to incorporate it into your own code. Suppose your input point cloud `pts` has shape `(n,3)` or `(b,n,3)`, then the following code will give you the VecKM local geometry encoding with output shape `(n,d)` or `(b,n,d)`. It is recommended to have PyTorch >= 1.13.0 since it has better support for complex tensors, but lower versions shall also work.
 
-If you are struggled with installation (e.g. due to some environment issues), it is very simple to implement VecKM if you want to incorporate it into your own code. Suppose your input point cloud `pts` has shape `(n,3)` or `(b,n,3)`, then the following code will give you the VecKM local geometry encoding with output shape `(n,d)` or `(b,n,d)`. It is recommended to have PyTorch >= 1.13.0 since it has better support for complex tensors, but lower versions shall also work.
+```
+conda create -n VecKM python=3.11
+conda activate VecKM
+conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install -c conda-forge cudatoolkit-dev
+pip install scipy
+pip install complexPyTorch
+```
 
 ``` python
 import torch
@@ -161,7 +126,7 @@ G = G.real**2 + G.imag**2 # it will be Real(10, 1000, 128) or Real(1000, 1024).
 
 ℹ️ See **[Suggestion for Tuning $\alpha$, $\beta$]** for how to select appropriate `alpha` and `beta` parameters.
 
-ℹ️ See **[Suggestion for Tuning $d$, $p$]** for how to select appropriate `alpha` and `beta` parameters.
+ℹ️ See **[Suggestion for Tuning $d$, $p$]** for how to select appropriate `d` and `p` parameters.
 
 ℹ️ **Feel free to contact me if you are unsure! I will try to respond within 1 day.**
 
@@ -293,9 +258,6 @@ We find empirically $d\times p$ is strongly correlated to the encoding quality. 
 Several examples:
 * d = 256, p = 4096 is for point cloud size ~20k. Runtime is about 28ms.
 * d = 128, p = 8192 is for point cloud size ~50k. Runtime is about 76ms.
-
-## Tutorials
-Check out the [example.ipynb](examples/example.ipynb) for the example analysis of VecKM.
 
 ## Experiments
 Check out the applications of VecKM to [normal estimation](experiments/normal_estimation), [classification](experiments/classification), [part segmentation](experiments/part_segmentation). The overall architecture change will be like:

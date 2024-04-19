@@ -252,7 +252,7 @@ We find empirically $d\times p$ is strongly correlated to the encoding quality. 
 * A larger point cloud size requires a larger $p$.
 
 Several examples:
-* d = 256, p = 4096 is for point cloud size ~100k. Runtime is about 28ms.
+* d = 256, p = 4096 is for point cloud size ~100k. Runtime is about 80ms.
 
 ## Experiments
 Check out the applications of VecKM to [normal estimation](experiments/normal_estimation), [classification](experiments/classification), [part segmentation](experiments/part_segmentation). The overall architecture change will be like:

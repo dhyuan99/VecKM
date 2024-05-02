@@ -27,6 +27,8 @@
 
 ⚠️ If your x, y, z do not have the same scale, make sure scaling them so that they have the same scale.
 
+⚠️ VecKM is not rotational invariant. If the local point cloud is rotated, the encoding can be very different.
+
 It is very simple to implement VecKM if you want to incorporate it into your own code. Suppose your input point cloud `pts` has shape `(n,3)` or `(b,n,3)`, then the following code will give you the VecKM local geometry encoding with output shape `(n,d)` or `(b,n,d)`. It is recommended to have PyTorch >= 1.13.0 since it has better support for complex tensors, but lower versions shall also work.
 
 ```

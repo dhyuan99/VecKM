@@ -10,7 +10,7 @@
 
 <p align='center';>
 <b>
-<em>arXiv-Preprint, 2024</em> &nbsp&nbsp&nbsp&nbsp <a href="http://arxiv.org/abs/2404.01568" target="_blank" style="text-decoration: none;">[arXiv]</a>
+<em>ICML2024</em> &nbsp&nbsp&nbsp&nbsp <a href="http://arxiv.org/abs/2404.01568" target="_blank" style="text-decoration: none;">[arXiv]</a>
 </b>
 </p>
 

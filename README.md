@@ -119,7 +119,7 @@ feat_trans = nn.Sequential(
     ComplexLinear(128, 128)
 )
 G = feat_trans(vkm(pts))
-G = G.real**2 + G.imag**2 # it will be Real(10, 1000, 128) or Real(1000, 1024).
+G = G.real**2 + G.imag**2 # it will be Real(10, 1000, 128) or Real(1000, 128).
 ```
 
 ℹ️ See **[Suggestion for Tuning $\alpha$, $\beta$]** for how to tune `alpha` and `beta` parameters.

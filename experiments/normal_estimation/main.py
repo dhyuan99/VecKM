@@ -34,9 +34,7 @@ def random_rotate(pts, normal):
 
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=str, default='VecKM_')
-parser.add_argument('--alpha_list', nargs='+', type=float, default=[60, 90])
-parser.add_argument('--beta_list', nargs='+', type=float, default=[12, 18])
+parser.add_argument('--model', type=str, default='VecKM')
 # PointNet, DGCNN parameters.
 parser.add_argument('--num_neighbors', type=int, default=500)
 # KPConv parameters.

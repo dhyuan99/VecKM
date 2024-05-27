@@ -68,7 +68,7 @@ We get the following accuracies by setting random seed as 0. Different GPUs will
 | PointNet          |       90.8%       |        87.1%        |          3.03 ms          |    1.61M     |
 | PointNet + VecKM  |   92.9% (+2.1%)   |    89.7% (+2.6%)    |  14.3 ms   |    9.06M     |
 | PointNet2         |       92.8%       |        89.4%        |         117 ms          |    1.48M     |
-| PointNet2 + VecKM |   93.0% (+0.2%)   |    89.7% (+0.3%)    | 65.8 ms (78% faster) |    3.94M     |
+| PointNet2 + VecKM |   93.0% (+0.2%)   |    89.7% (+0.3%)    | 40.67 ms (1.9x faster) |    3.94M     |
 | PCT               |       92.5%       |        89.2%        |         149.72 ms          |    2.88M     |
 | PCT + VecKM       |   93.0% (+0.5%)   |    90.5% (+1.3%)    |     21.4 (6x faster)      |    5.07M     |
 

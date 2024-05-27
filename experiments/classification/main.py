@@ -216,7 +216,7 @@ if __name__ == "__main__":
     parser.add_argument('--model_path', type=str, default='', metavar='N',
                         help='Pretrained model path')
     parser.add_argument('--model', type=str, required=True,
-                        help='model to use, [ease_PCT, PCT, ease_pointnet2, pointnet2]')
+                        help='model to use, [pointnet, pointnet_VecKM, pointnet2, pointnet2_VecKM, PCT, PCT_VecKM]')
     args = parser.parse_args()
 
     _init_()

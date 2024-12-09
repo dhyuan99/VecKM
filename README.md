@@ -10,7 +10,10 @@
 
 <p align='center';>
 <b>
-<em>ICML2024</em> &nbsp&nbsp&nbsp&nbsp <a href="http://arxiv.org/abs/2404.01568" target="_blank" style="text-decoration: none;">[arXiv]</a>
+<em>ICML2024</em> &nbsp&nbsp&nbsp&nbsp <a href="http://arxiv.org/abs/2404.01568" target="_blank" style="text-decoration: none;">[Paper]</a>
+</b>
+<b>
+&nbsp&nbsp&nbsp&nbsp <a href="https://www.youtube.com/watch?v=1i-_XRhK5VA" target="_blank" style="text-decoration: none;">[Video]</a>
 </b>
 </p>
 
@@ -268,12 +271,18 @@ Check out the applications of VecKM to [normal estimation](experiments/normal_es
 # Citation
 If you find it helpful, please consider citing our papers:
 ```
-@misc{yuan2024linear,
-      title={A Linear Time and Space Local Point Cloud Geometry Encoder via Vectorized Kernel Mixture (VecKM)}, 
-      author={Dehao Yuan and Cornelia Fermüller and Tahseen Rabbani and Furong Huang and Yiannis Aloimonos},
-      year={2024},
-      eprint={2404.01568},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@InProceedings{pmlr-v235-yuan24b,
+  title = 	 {A Linear Time and Space Local Point Cloud Geometry Encoder via Vectorized Kernel Mixture ({V}ec{KM})},
+  author =       {Yuan, Dehao and Fermuller, Cornelia and Rabbani, Tahseen and Huang, Furong and Aloimonos, Yiannis},
+  booktitle = 	 {Proceedings of the 41st International Conference on Machine Learning},
+  pages = 	 {57871--57886},
+  year = 	 {2024},
+  editor = 	 {Salakhutdinov, Ruslan and Kolter, Zico and Heller, Katherine and Weller, Adrian and Oliver, Nuria and Scarlett, Jonathan and Berkenkamp, Felix},
+  volume = 	 {235},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {21--27 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {https://raw.githubusercontent.com/mlresearch/v235/main/assets/yuan24b/yuan24b.pdf},
+  url = 	 {https://proceedings.mlr.press/v235/yuan24b.html},
 }
 ```

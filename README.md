@@ -79,7 +79,7 @@ After executing the script
 from VecKM.visualize import check_vkm_quality_3d
 check_vkm_quality_3d(vkm, pts, which_pt=0)
 ```
-It will generate a gif showing the 3d visualization. If the distribution aligns with the point cloud, it means the encoding quality is good.
+It will generate a gif showing the 3d visualization. If the distribution aligns with the point cloud, it means the encoding quality is good. Check [./demo/main.py](demo/main.py) for more details.
 <div align="center">
 <img src="assets/quality_check.gif" alt="Watch the video" width="100%">
 </div>
@@ -90,7 +90,7 @@ Local point cloud encoding is usually followed by point-wise regression, classif
 <img src="assets/downstream.png" alt="Watch the video" width="100%">
 </div>
 
-<img src="assets/deep_VecKM.jpg" style="width:80%"> -->
+<img src="assets/deep_VecKM.jpg" style="width:80%">
 
 # Citation
 If you find it helpful, please consider citing our papers:

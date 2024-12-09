@@ -79,7 +79,7 @@ After executing the script
 from VecKM.visualize import check_vkm_quality_3d
 check_vkm_quality_3d(vkm, pts, which_pt=0)
 ```
-It will generate a gif showing the 3d visualization. If the distribution aligns with the point cloud, it means the encoding quality is good. Check [./demo/main.py](demo/main.py) for more details.
+It will generate a gif showing the 3d visualization. If the distribution aligns with the point cloud, it means the encoding quality is good. Check [demo](demo) for more details.
 <div align="center">
 <img src="assets/quality_check.gif" alt="Watch the video" width="100%">
 </div>

@@ -19,13 +19,12 @@
 
 ## News and Updates
 * [Dec 8, 2024] We did an extension project of VecKM. We apply VecKM to event camera inputs and predict the motion field. Check out [VecKM_flow](https://www.github.com/dhyuan99/VecKM_flow).
-* [Dec 8, 2024] I will start refactorizing the VecKM codes and make an easy-to-use API.
 
 ## Highlighted Features
 <img src="assets/highlighted_features.drawio.png" style="width:100%">
 
 ## API Usage
-It is a generic local point cloud encoder, a.k.a. point tokenizer, patch encoder, etc. The API is easily used by the following codes, after installing the package. See [demo](./demo) for the codes and data for running the demo: 
+VecKM is a generic local point cloud encoder, a.k.a. point tokenizer, patch encoder, etc. The API is easily used by the following codes, after installing the package:
 ```
 git clone https://github.com/dhyuan99/VecKM.git
 cd VecKM
@@ -37,7 +36,7 @@ pip install --upgrade pip setuptools wheel
 python setup.py sdist bdist_wheel
 pip install .
 ```
-
+See [demo](./demo) for the codes and data for running the demo: 
 ```
 cd demo
 python main.py
@@ -46,11 +45,11 @@ python main.py
 ## API Documentation
 We provide two implementations of VecKM: `ExactVecKM` and `FastVecKM`, corresponding to Eqn. (3) and Eqn. (2) in the paper. 
 * `ExactVecKM` computes an accurate local point cloud encoding, in a slower manner. Suitable for tasks where accurate geometry is needed, e.g. normal estimation.
-* `FastVecKM` computes a noisy local point cloud encoding, in a faster manner. Suitable for tasks where only coarse geometry is needed, e.g. classification.
+* `FastVecKM` computes a noisy local point cloud encoding with large point cloud inputs (e.g. size > 50000), in a faster manner. Suitable for tasks where only coarse geometry is needed, e.g. classification.
 
 Both of them
 
-* receive inputs with shape (N, 3) and output (N, d).
+* receive inputs with shape (n, 3) and output (n, d), operations defined at [Highlighted Features](#highlighted-features).
 * scalable to point cloud size > 50000 and neighborhood size > 500 on 16GB memory.
 
 The API call is as simple as followed, as shown in [./demo/main.py](demo/main.py):
@@ -69,8 +68,8 @@ vkm = vkm.cuda()
 G = vkm(pts)        # G has shape (n, 384).
 ```
 
-### How to check the encoding quality?
-We provide a visual check of the encoding quality (Figure 5 in the paper). It will 
+## How to check the encoding quality?
+`VecKM.visualize.check_vkm_quality_3d` provides a visual check of the encoding quality (Figure 5 in the paper). It will 
 
 * visualize the local point cloud around `pts[which_pt]`, with radius specified in `vkm.radius`.
 * visualize the reconstructed point cloud distribution from the VecKM encoding.
@@ -85,9 +84,11 @@ It will generate a gif showing the 3d visualization. If the distribution aligns 
 <img src="assets/quality_check.gif" alt="Watch the video" width="100%">
 </div>
 
-
-<!-- ## Experiments
-Check out the applications of VecKM to [normal estimation](experiments/normal_estimation), [classification](experiments/classification), [part segmentation](experiments/part_segmentation). The overall architecture change will be like:
+## Downstream Tasks
+Local point cloud encoding is usually followed by point-wise regression, classification, regression, etc., as shown below.
+<div align="center">
+<img src="assets/downstream.png" alt="Watch the video" width="100%">
+</div>
 
 <img src="assets/deep_VecKM.jpg" style="width:80%"> -->
 

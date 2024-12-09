@@ -24,8 +24,20 @@
 ## Highlighted Features
 <img src="assets/highlighted_features.drawio.png" style="width:100%">
 
-## API Usage -- Demo
-It is a generic local point cloud encoder, a.k.a. point tokenizer, patch encoder, etc. The API is easily used by the following codes, after [installing the package](#installation). See [demo](./demo) for the codes and data for running the demo: 
+## API Usage
+It is a generic local point cloud encoder, a.k.a. point tokenizer, patch encoder, etc. The API is easily used by the following codes, after installing the package. See [demo](./demo) for the codes and data for running the demo: 
+```
+git clone https://github.com/dhyuan99/VecKM.git
+cd VecKM
+
+conda create -n VecKM python=3.13
+conda activate VecKM
+
+pip install --upgrade pip setuptools wheel
+python setup.py sdist bdist_wheel
+pip install .
+```
+
 ```
 cd demo
 python main.py
@@ -41,7 +53,7 @@ Both of them
 * receive inputs with shape (N, 3) and output (N, d).
 * scalable to point cloud size > 50000 and neighborhood size > 500 on 16GB memory.
 
-The API call is as simple as followed:
+The API call is as simple as followed, as shown in [./demo/main.py](demo/main.py):
 ``` python
 from VecKM.encoder import ExactVecKM, FastVecKM
 
@@ -73,23 +85,11 @@ It will generate a gif showing the 3d visualization. If the distribution aligns 
 <img src="assets/quality_check.gif" alt="Watch the video" width="100%">
 </div>
 
-## Installation
-```
-git clone https://github.com/dhyuan99/VecKM.git
-cd VecKM
 
-conda create -n VecKM python=3.13
-conda activate VecKM
-
-pip install --upgrade pip setuptools wheel
-python setup.py sdist bdist_wheel
-pip install .
-```
-
-## Experiments
+<!-- ## Experiments
 Check out the applications of VecKM to [normal estimation](experiments/normal_estimation), [classification](experiments/classification), [part segmentation](experiments/part_segmentation). The overall architecture change will be like:
 
-<img src="assets/deep_VecKM.jpg" style="width:80%">
+<img src="assets/deep_VecKM.jpg" style="width:80%"> -->
 
 # Citation
 If you find it helpful, please consider citing our papers:

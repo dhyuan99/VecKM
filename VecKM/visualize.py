@@ -29,6 +29,7 @@ def check_vkm_quality_3d(vkm, pts, which_pt, vis_path='quality_check'):
     2. distribution reconstruction of the local point cloud, from the VecKM encoding.
        ** Figure 5 in the paper. **
     """
+    assert vkm.__class__.__name__ in ['ExactVecKM', 'FastVecKM'], "Only support ExactVecKM or FastVecKM"
     assert vkm.pt_dim == 3, "Only support 3D point cloud for visualization."
     assert pts.dim() == 2 and pts.size(1) == 3, "Input tensor should be (N, 3)"
 

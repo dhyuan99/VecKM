@@ -1,7 +1,7 @@
 import numpy as np
 import torch
-from encoder import ExactVecKM, FastVecKM
-from visualize import check_vkm_quality_3d
+from VecKM.encoder import ExactVecKM, FastVecKM
+from VecKM.visualize import check_vkm_quality_3d
 
 pts = np.loadtxt('Liberty100k.xyz')
 print('The shape of pts is (n, 3):', pts.shape)
@@ -15,11 +15,15 @@ print(pts)
 pts = torch.tensor(pts).float()
 pts = pts.cuda()
 
-vkm = ExactVecKM(pt_dim=3, enc_dim=384, radius=0.1)
-vkm = vkm.cuda()
-# G = vkm(pts)
+exact_vkm = ExactVecKM(pt_dim=3, enc_dim=384, radius=0.1)
+exact_vkm = exact_vkm.cuda()
+G = exact_vkm(pts)
+print(f"ExactVecKM: The shape of per-point local geometry encoding is (n, d): {G.shape}")
 
-# vkm = FastVecKM(pt_dim=3, enc_dim=384, radius=0.1)
-# vkm = vkm.cuda()
+fast_vkm = FastVecKM(pt_dim=3, enc_dim=384, radius=0.1)
+fast_vkm = fast_vkm.cuda()
+G = fast_vkm(pts)
+print(f"FastVecKM: The shape of per-point local geometry encoding is (n, d): {G.shape}")
 
-check_vkm_quality_3d(vkm, pts, 0)
+check_vkm_quality_3d(exact_vkm, pts, 0, vis_path='exact_vkm_quality_check')
+check_vkm_quality_3d(fast_vkm, pts, 0, vis_path='fast_vkm_quality_check')

@@ -13,7 +13,7 @@
 <em>ICML2024</em> &nbsp&nbsp&nbsp&nbsp <a href="http://arxiv.org/abs/2404.01568" target="_blank" style="text-decoration: none;">[Paper]</a>
 </b>
 <b>
-&nbsp&nbsp&nbsp&nbsp <a href="https://www.youtube.com/watch?v=1i-_XRhK5VA" target="_blank" style="text-decoration: none;">[Video]</a>
+&nbsp&nbsp&nbsp&nbsp <a href="https://www.youtube.com/watch?v=1i-_XRhK5VA" target="_blank" style="text-decoration: none;">[Video Talk]</a>
 </b>
 </p>
 

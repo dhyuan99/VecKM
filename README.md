@@ -14,6 +14,10 @@
 </b>
 </p>
 
+## News and Updates
+* [Dec 8, 2024] We did an extension project of VecKM. We apply VecKM to event camera inputs and predict the motion field. Check out [VecKM_flow](https://www.github.com/dhyuan99/VecKM_flow).
+* [Dec 8, 2024] I will start refactorizing the VecKM codes and make an easy-to-use API.
+
 ## Highlighted Features
 <img src="assets/teasor_explained.jpg" style="width:100%">
 

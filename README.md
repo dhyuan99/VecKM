@@ -92,7 +92,7 @@ Local point cloud encoding is usually followed by point-wise regression, classif
 
 <img src="assets/deep_VecKM.jpg" style="width:80%">
 
-# Citation
+## Citation
 If you find it helpful, please consider citing our papers:
 ```
 @InProceedings{pmlr-v235-yuan24b,

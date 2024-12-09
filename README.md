@@ -24,15 +24,15 @@
 ## Highlighted Features
 <img src="assets/highlighted_features.drawio.png" style="width:100%">
 
-## API Usage
+## API Usage -- Demo
 It is a generic local point cloud encoder, a.k.a. point tokenizer, patch encoder, etc. The API is easily used by the following codes, after [installing the package](#installation). See [demo](./demo) for the codes and data for running the demo: 
 ```
 cd demo
 python main.py
 ```
-We provide two implementations of VecKM: `ExactVecKM` and `FastVecKM`, corresponding to Eqn. (3) and Eqn. (2) in the paper. 
 
-### API Documentation
+## API Documentation
+We provide two implementations of VecKM: `ExactVecKM` and `FastVecKM`, corresponding to Eqn. (3) and Eqn. (2) in the paper. 
 * `ExactVecKM` computes an accurate local point cloud encoding, in a slower manner. Suitable for tasks where accurate geometry is needed, e.g. normal estimation.
 * `FastVecKM` computes a noisy local point cloud encoding, in a faster manner. Suitable for tasks where only coarse geometry is needed, e.g. classification.
 
